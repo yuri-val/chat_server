@@ -4,4 +4,7 @@ class User < ApplicationRecord
   validates :password,
             length: { minimum: 6 },
             if: -> { new_record? || !password.nil? }
+
+  has_many :own_rooms, class_name: 'Room', foreign_key: :creator_id            
+  has_and_belongs_to_many :rooms
 end
