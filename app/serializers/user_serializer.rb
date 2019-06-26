@@ -3,5 +3,4 @@ class UserSerializer < ActiveModel::Serializer
   attribute :user_id do
     object.id
   end
-  
 end
