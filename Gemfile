@@ -17,8 +17,7 @@ gem 'jwt'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-# A lightning fast JSON:API serializer for Ruby Objects.
-gem 'fast_jsonapi'
+gem 'active_model_serializers', '~> 0.10', require: true
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
