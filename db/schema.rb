@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_26_141633) do
+ActiveRecord::Schema.define(version: 2019_06_26_153730) do
+
+  create_table "messages", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "room_id"
+    t.string "user_id"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
 
   create_table "rooms", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "room_name"
@@ -33,4 +43,6 @@ ActiveRecord::Schema.define(version: 2019_06_26_141633) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
 end
