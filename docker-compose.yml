@@ -1,0 +1,48 @@
+version: '3'
+services:
+  redis:
+    image: 'redis:4.0-alpine'
+    command: redis-server --requirepass yourpassword
+    volumes:
+      - 'redis:/data'
+
+  postgres:
+    image: 'postgres:10.3-alpine'
+    volumes:
+      - 'postgres:/var/lib/postgresql/data'
+    env_file:
+      - '.env'
+
+  chat_server:
+    build:
+      context: '.'
+      args:
+        - RAILS_ENV=production
+    restart: always
+    container_name: chat_server_latest
+    ports:
+      - "8000:8000"
+    env_file:
+      - '.env'
+    depends_on:
+      - 'postgres'
+      - 'redis'
+    links:
+      - 'postgres:postgres'
+
+  cable:
+    depends_on:
+      - 'redis'
+    build: .
+    command: puma -p 1030 cable/config.ru
+    ports:
+      - '1030:1030'
+    volumes:
+      - '.:/app'
+    env_file:
+      - '.env'
+
+volumes:
+  postgres:
+  chat_server:
+  redis:
