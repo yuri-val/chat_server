@@ -3,6 +3,7 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
 
     if @message.save
+      SendMessageJob.perform_now message: @message
       render json: { result: "message successfully sent" }
     else
       render json: { errors: @message.errors }, status: :unprocessable_entity
