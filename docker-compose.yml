@@ -2,7 +2,7 @@ version: '3'
 services:
   redis:
     image: 'redis:4.0-alpine'
-    command: redis-server --requirepass yourpassword
+    command: redis-server
     volumes:
       - 'redis:/data'
 
@@ -19,9 +19,10 @@ services:
       args:
         - RAILS_ENV=production
     restart: always
+    entrypoint: ['bash', '/app/entrypoint.sh']
     container_name: chat_server_latest
     ports:
-      - "8000:8000"
+      - "80:8000"
     env_file:
       - '.env'
     depends_on:
@@ -41,6 +42,20 @@ services:
       - '.:/app'
     env_file:
       - '.env'
+
+  chat_server_serveo:
+    image: taichunmin/serveo:latest
+    tty: true
+    stdin_open: true
+    # see https://serveo.net/ for more options
+    command: "ssh -R chat_server2019:80:chat_server:8000 -o \"StrictHostKeyChecking no\" serveo.net"
+
+  cable_serveo:
+    image: taichunmin/serveo:latest
+    tty: true
+    stdin_open: true
+    # see https://serveo.net/ for more options
+    command: "ssh -R chat_server2019:1030:cable:1030 -o \"StrictHostKeyChecking no\" serveo.net"
 
 volumes:
   postgres:
