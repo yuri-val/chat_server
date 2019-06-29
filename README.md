@@ -1,24 +1,36 @@
-# README
+# Chat Server [Ruby on Rails]
+## How to run
+### 0. Install dependencies
+To work with project you need to have installed docker. All manuals ypu can find [here](https://docs.docker.com/install/).  
+### 1. Clone repo
+Clone this repo to your computer
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+`git clone https://github.com/yuri-val/chat_server`
 
-Things you may want to cover:
+### 2. Start project
+Go to project directory and execute follow command in terminal:
 
-* Ruby version
+`docker-compose up --build`
 
-* System dependencies
+### 3. Access to project
+To access project's entrypoints you can use locale address or serveo's revers address:
+- `http:localhost:8000`  
+- `https://chat_server2019.serveo.net`
 
-* Configuration
+WebSocket server also work on local and remote address:
+- `ws:localhost:1030`  
+- `wss://chat_server2019.serveo.net:1030`
 
-* Database creation
+## Ecosystem
 
-* Database initialization
+**Platform:** Ruby [2.6.3]; Rails [5.2.3]
 
-* How to run the test suite
+**Database:** Postgres [10.3]
 
-* Services (job queues, cache servers, search engines, etc.)
+**Key-Value Storage:** Redis [4.0]
 
-* Deployment instructions
+**WebSocket Server:** Rails built-in *ActionCable* [5.2.3]
 
-* ...
+## Entrypoints
+
+You can find [here](https://docs.google.com/document/d/1IQk0IWjdqDhTTXcB4O8P5gH1W308MUypSyos0GHZOzI/edit)  
