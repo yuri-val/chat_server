@@ -12,7 +12,7 @@ gem 'mysql2', '>= 0.4.4', '< 0.6.0', group: :development
 gem 'pg', group: :production
 
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.12'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
 
